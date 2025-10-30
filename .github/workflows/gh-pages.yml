@@ -4,17 +4,35 @@ on:
   push:
     branches: [ main ]
 
+# Grant permissions required to push to gh-pages and manage Pages
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare publish directory
+        run: |
+          rm -rf public
+          mkdir public
+          # copy only the site files (avoid node_modules, etc.)
+          cp -v index.html public/ || true
+          cp -v CNAME public/ || true
+          # copy any static folders if present
+          if [ -d "static" ]; then cp -r static public/; fi || true
+          if [ -d "assets" ]; then cp -r assets public/; fi || true
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./public
           publish_branch: gh-pages
-          allow_empty_commit: true
+          allow_empty_commit: false
