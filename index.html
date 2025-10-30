@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NightZT — Нічне Таксі та Доставка</title>
+  <meta name="description" content="Нічне таксі, доставка алкоголю, ліків, пального, трезвий водій. Працюємо в комендантську годину — легально, безпечно, конфіденційно.">
+  <style>
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:#0b0f18;color:#f3f4f6;line-height:1.5}
+    .container{max-width:960px;margin:auto;padding:24px}
+    header{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:30px}
+    h1{margin:0;font-size:26px;color:#ffd166}
+    p{margin-top:6px;color:#a3a3a3}
+    .card{background:#131b2b;padding:20px;border-radius:12px;margin-bottom:20px;box-shadow:0 0 12px rgba(0,0,0,0.4)}
+    ul{list-style:none;padding:0;margin:0}
+    li{margin:8px 0;color:#cbd5e1}
+    form{display:grid;gap:10px}
+    input,select,textarea{padding:10px;border-radius:8px;border:none;background:#1e293b;color:#fff}
+    button{padding:12px;border:none;border-radius:8px;background:#ffd166;color:#111;font-weight:600;cursor:pointer}
+    footer{text-align:center;color:#777;margin-top:40px;font-size:14px}
+    a{color:#ffd166;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>NightZT — Нічне Таксі та Доставка</h1>
+      <p>Працюємо цілодобово та під час комендантської години. Швидко, безпечно, конфіденційно.</p>
+      <p><strong>Телефон:</strong> <a href="tel:+380983499715">+38 (098) 349-97-15</a> | <strong>Telegram:</strong> <a href="https://t.me/nightzt" target="_blank">@nightzt</a></p>
+    </header>
+
+    <section class="card">
+      <h2>Наші послуги</h2>
+      <ul>
+        <li>🚕 Таксі по місту та міжміські трансфери</li>
+        <li>🍾 Доставка алкоголю</li>
+        <li>💊 Доставка ліків</li>
+        <li>⛽ Доставка пального</li>
+        <li>🚗 Послуга «Трезвий водій»</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Замовити зараз</h2>
+      <form id="orderForm" onsubmit="return handleSubmit(event)">
+        <input id="name" name="name" required placeholder="Ваше ім'я">
+        <input id="phone" name="phone" required placeholder="Ваш телефон (+380...)" type="tel">
+        <select id="service" name="service">
+          <option>Таксі</option>
+          <option>Доставка алкоголю</option>
+          <option>Доставка ліків</option>
+          <option>Доставка пального</option>
+          <option>Трезвий водій</option>
+        </select>
+        <textarea id="details" name="details" rows="3" placeholder="Додаткова інформація"></textarea>
+        <button type="submit">Відправити замовлення</button>
+      </form>
+      <p style="font-size:13px;color:#a3a3a3;margin-top:8px">Після надсилання ми зв’яжемося з вами для підтвердження.</p>
+    </section>
+
+    <footer>
+      © 2025 NightZT — Нічне Таксі та Доставка. Телефон: +38 (098) 349-97-15 | Telegram: @nightzt
+    </footer>
+  </div>
+
+  <script>
+    function handleSubmit(e){
+      e.preventDefault();
+      const name=document.getElementById('name').value;
+      const phone=document.getElementById('phone').value;
+      const service=document.getElementById('service').value;
+      const details=document.getElementById('details').value;
+      const subject=encodeURIComponent('Нове замовлення — '+service);
+      const body=encodeURIComponent(`Ім'я: ${name}\nТелефон: ${phone}\nПослуга: ${service}\nДеталі: ${details}`);
+      window.location.href=`mailto:nightzt@example.com?subject=${subject}&body=${body}`;
+    }
+  </script>
+</body>
+</html>
